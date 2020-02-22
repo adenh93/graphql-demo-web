@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { Post } from "../../../../graphql/_generated/types";
 import PostItem from "../PostItem";
+import { Grid } from "@material-ui/core";
+import { Container } from "./Styles";
 
 export interface PostListProps {
   posts: Post[];
@@ -9,9 +11,15 @@ export interface PostListProps {
 const PostList: FC<PostListProps> = ({ posts }) => {
   return (
     <>
-      {posts.map(post => (
-        <PostItem {...post} />
-      ))}
+      <Container>
+        <Grid container spacing={2}>
+          {posts.map(({ id, ...post }) => (
+            <Grid item sm={12} key={id}>
+              <PostItem id={id} {...post} />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </>
   );
 };

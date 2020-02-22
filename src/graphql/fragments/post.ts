@@ -4,5 +4,6 @@ export const postFields = gql`
   fragment postFields on Post {
     id
     content
+    createdAt
   }
 `;
