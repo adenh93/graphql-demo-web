@@ -12,36 +12,11 @@ export type CreatePostInput = {
   content: Scalars['String'],
 };
 
-export type CreateUserInput = {
-  username: Scalars['String'],
-  email: Scalars['String'],
-  name: Scalars['String'],
-};
-
 export type Mutation = {
    __typename?: 'Mutation',
-  createUser?: Maybe<User>,
-  updateUser?: Maybe<User>,
-  deleteUser?: Maybe<User>,
   createPost?: Maybe<Post>,
   updatePost?: Maybe<Post>,
   deletePost?: Maybe<Post>,
-};
-
-
-export type MutationCreateUserArgs = {
-  data?: Maybe<CreateUserInput>
-};
-
-
-export type MutationUpdateUserArgs = {
-  id: Scalars['ID'],
-  data?: Maybe<UpdateUserInput>
-};
-
-
-export type MutationDeleteUserArgs = {
-  id: Scalars['ID']
 };
 
 
@@ -60,6 +35,12 @@ export type MutationDeletePostArgs = {
   id: Scalars['ID']
 };
 
+export enum MutationType {
+  Created = 'CREATED',
+  Updated = 'UPDATED',
+  Deleted = 'DELETED'
+}
+
 export type Post = {
    __typename?: 'Post',
   id: Scalars['ID'],
@@ -68,17 +49,16 @@ export type Post = {
   updatedAt: Scalars['String'],
 };
 
-export type Query = {
-   __typename?: 'Query',
-  user?: Maybe<User>,
-  users: Array<User>,
-  post?: Maybe<Post>,
-  posts: Array<Post>,
+export type PostSubscriptionPayload = {
+   __typename?: 'PostSubscriptionPayload',
+  mutation: MutationType,
+  node?: Maybe<Post>,
 };
 
-
-export type QueryUserArgs = {
-  id: Scalars['ID']
+export type Query = {
+   __typename?: 'Query',
+  post?: Maybe<Post>,
+  posts: Array<Post>,
 };
 
 
@@ -86,21 +66,11 @@ export type QueryPostArgs = {
   id: Scalars['ID']
 };
 
+export type Subscription = {
+   __typename?: 'Subscription',
+  newPost: Post,
+};
+
 export type UpdatePostInput = {
   content: Scalars['String'],
-};
-
-export type UpdateUserInput = {
-  username?: Maybe<Scalars['String']>,
-  email?: Maybe<Scalars['String']>,
-  name?: Maybe<Scalars['String']>,
-};
-
-export type User = {
-   __typename?: 'User',
-  id: Scalars['ID'],
-  username: Scalars['String'],
-  email: Scalars['String'],
-  name: Scalars['String'],
-  posts: Array<Post>,
 };

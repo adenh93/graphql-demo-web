@@ -1,7 +1,7 @@
 import { gql } from "apollo-boost";
 import { postFields } from "../fragments/post";
 
-export const getPosts = gql`
+export const GET_POSTS = gql`
   query {
     posts {
       ...postFields
@@ -10,7 +10,7 @@ export const getPosts = gql`
   ${postFields}
 `;
 
-export const getPost = gql`
+export const GET_POST = gql`
   query($id: ID!) {
     post(id: $id) {
       ...postFields
